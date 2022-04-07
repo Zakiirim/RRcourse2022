@@ -1,0 +1,65 @@
+---
+title: "Assignment 2"
+author: "Raffaele di Costanzo"
+date: "3/30/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+<center><h1>Friends (American TV series)</h1></center>
+
+
+# 1. Description of the show
+
+Friends, popular American television sitcom that aired on the National Broadcasting Company (NBC) network from 1994 to 2004. It won six Emmy Awards, including outstanding comedy series, and from its second season until the end of its run maintained a top five or better Nielsen rating, hitting number one in its eighth season.
+Friends was created by David Crane and Marta Kauffman and is about a group of six young adults who are either roommates or neighbors in New York City’s Greenwich Village. Much of the show takes place in the friends’ apartments as they visit one another. The program revolves around the characters’ individual and collective search for sex, commitment, and meaning. The friends consist of three men and three women, whose varied personalities and shortcomings allow for both broad audience identification and abundant comedic moments. At the beginning of the show, Monica Geller (played by Courteney Cox) is a chef who often changes jobs and boyfriends in her search for the perfect match. Her brother, Ross (David Schwimmer), is a paleontologist and divorcé (three times over by the end of the series) with a child. He has a long-standing crush on Rachel Green (Jennifer Aniston), a fashion-minded woman who grew up in a wealthy family but works (for a time) as a barista at Central Perk, a café and popular meeting spot for the group. Eventually she lands a job with Ralph Lauren. Phoebe Buffay (Lisa Kudrow) is a ditsy masseuse and would-be musician with a quirky outlook on life. Joey Tribbiani (Matt LeBlanc) is a mostly struggling actor and buffoon who often confides in Chandler Bing (Matthew Perry), a well-off statistics and data analyst who has terrible luck with women and in time develops an eye for Monica. Throughout the series, the friends live together or apart in different combinations.
+
+# 2. Logo of the show
+
+<center><img src="https://logos-world.net/wp-content/uploads/2021/08/Friends-Logo.png" /></center>
+
+# 3. Basic statistics summary
+<img src="https://i.imgur.com/PZxeoF9.png" /> <br /><br />
+<img src="https://www.economist.com/sites/default/files/images/2019/09/blogs/prospero/20190928_woc779.png" /><br /><br />
+<img src="https://d25d2506sfb94s.cloudfront.net/cumulus_uploads/inlineimage/2018-01-29/Friends%20attributes-01.png" /><br /><br />
+
+
+
+# Views over time
+Below there's a graph with the **show's views trend over time**:
+```{r}
+library(ggplot2)
+
+data <- read.csv("data.csv")
+data$U.S..viewers <- gsub(" million", "", data$U.S..viewers)
+data$U.S..viewers <- as.numeric(data$U.S..viewers)
+data$Date <- as.Date(data$Date, format = "%m/%d/%y")
+ggplot(data, aes(x=Date, y=U.S..viewers)) + 
+  geom_line(color="steelblue") + 
+  ylab("US viewers")
+```
+
+### Here the **most viewed episodes**:
+
+```{r}
+most_viewed_episodes <- data[order(data[,9], decreasing = TRUE),]
+top_5 <- head(most_viewed_episodes)
+knitr::kable(top_5[c("Title", "U.S..viewers")], row.names = F)
+```
+
+### Here the **least viewed episodes**:
+
+```{r}
+worst_5 <- tail(most_viewed_episodes)
+knitr::kable(worst_5[c("Title", "U.S..viewers")], row.names = F)
+```
+
+# Description of the changes
+
+We can see that the show's views trend was constant over time, however there are two episodes that registered a high count of views:
+
+* **The One After the Superbowl**: With 52.925 million viewers and a 47 percent audience share, it was the most-watched episode of the series, and is the highest-rated Super Bowl lead-out program of all time.
+* **The Last One**:  is the series finale of the television sitcom Friends. The episode serves as the seventeenth and eighteenth episode of season ten; the episode's two parts were classified as two separate episodes. 
+
