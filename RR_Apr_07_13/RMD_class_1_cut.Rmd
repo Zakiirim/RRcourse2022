@@ -165,23 +165,6 @@ plot(pressure)
 
 ```
 
-You can also use Python within the RMarkdown document like so:
-
-```{python}
-import pandas
-flights = pandas.read_csv("../Data/flights.csv")
-flights = flights[flights['dest'] == "ORD"]
-flights = flights[['carrier', 'dep_delay', 'arr_delay']]
-flights = flights.dropna()
-```
-
-```{r}
-library(ggplot2)
-ggplot(py$flights, aes(carrier, arr_delay)) + geom_point() + geom_jitter()
-
-cat("Example from: https://rstudio.github.io/reticulate/articles/r_markdown.html")
-```
-
 And a nice table alternative -> `kable` from the `knitr` package.
 
 ```{r}
@@ -222,7 +205,7 @@ We have previously set a typical width to `r typical_width` and the typical heig
 
 ## Conditional execution with `eval`
 
-(`is.weekend` comes from the `chron` package)
+(`is.weekend` comes from the `chrono` package)
 
 ```{r, eval=is.weekend(Sys.Date())}
 cat("It's the weekend! :)")
@@ -232,21 +215,8 @@ cat("It's the weekend! :)")
 cat("It's not the weekend! :(")
 ```
 
-## Handling errors
-
-```{r, error=TRUE}
-543 + "clearly a text and not a number"
-```
-
-By default RMarkdown stops after encountering an error. We can tell it to continue.
-
 ## Caching results that take long to compute
 
-```{r slow_chunk, cache=TRUE}
-Sys.sleep(10)
-a <- 4
-a
-```
 The chunk gets reevaluated if anything changes within the chunk. **Make sure you know what you're doing when caching**. 
 
 We can use `cache.extra =` to specify additional conditions for cache invalidation (i.e. to repeat the calculations), e.g.:
@@ -319,12 +289,6 @@ plot(cars)
 ```
 
 ### Hide the results with `results='hide'`
-
-```{r, results='hide'}
-
-a*typical_height*typical_width
-  
-```
 
 ### Generate Markdown content with R code with `results='asis'`
 
