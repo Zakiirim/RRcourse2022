@@ -1,0 +1,26 @@
+localhost:~# ps aux | grep cpu
+    6 root      0:00 [mm_percpu_wq]
+  164 root      0:00 grep cpu
+localhost:~# ps aux | tail -3
+   62 root      0:00 [kworker/u2:1]
+  165 root      0:00 ps aux
+  166 root      0:00 tail -3
+localhost:~# cd /etc/conf.d/
+localhost:/etc/conf.d# pwd
+/etc/conf.d
+localhost:/etc/conf.d# cat swap | head -3
+# If you are only using local swap partitions, you should not change
+# this file. Otherwise, you need to uncomment the below rc_before line
+# followed by the appropriate rc_need line.
+localhost:/etc/conf.d# echo "echo 'Finally Friday'" > task.sh
+localhost:/etc/conf.d# sh task.sh
+Finally Friday
+localhost:/etc/conf.d# crontab -e
+# do daily/weekly/monthly maintenance
+# min   hour    day     month   weekday command
+*/15    *       *       *       *       run-parts /etc/periodic/15min
+0       *       *       *       *       run-parts /etc/periodic/hourly
+0       2       *       *       *       run-parts /etc/periodic/daily
+0       3       *       *       6       run-parts /etc/periodic/weekly
+0       5       1       *       *       run-parts /etc/periodic/monthly
+0       7       *       *       5       sh /etc/conf.d/task.sh

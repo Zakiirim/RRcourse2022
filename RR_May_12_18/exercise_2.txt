@@ -1,0 +1,19 @@
+localhost:~/rr# cd ..
+localhost:~# rm -rf rr
+localhost:~# mkdir rr
+localhost:~# cd rr
+localhost:~/rr# touch test.txt
+localhost:~/rr# echo "blablabla" > new.txt
+localhost:~/rr# cp -r /etc/modules .
+localhost:~/rr# ls -la -S
+total 16
+drwxr-xr-x    6 root     root           281 Jan  9  2021 ..
+drwxr-xr-x    2 root     root           110 May 16 20:04 .
+-rw-r--r--    1 root     root            15 May 16 20:05 modules
+-rw-r--r--    1 root     root            10 May 16 20:05 new.txt
+-rw-r--r--    1 root     root             0 May 16 20:04 test.txt
+localhost:~/rr# cd ..
+localhost:~# rm -rf rr
+localhost:~# ls
+bench.py    hello.c     hello.js    readme.txt  test.txt
+localhost:~# ^C
